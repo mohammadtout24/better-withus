@@ -1,0 +1,35 @@
+<svg viewBox="0 0 520 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="logoTitle">
+  <title id="logoTitle">Better WithUs logo mark</title>
+  <defs>
+    <linearGradient id="bwuGradL" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a35c8"/>
+      <stop offset="100%" stop-color="#37a6f2"/>
+    </linearGradient>
+    <linearGradient id="bwuGradR" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#20c4ee"/>
+      <stop offset="100%" stop-color="#1f52e2"/>
+    </linearGradient>
+    <linearGradient id="bwuGradC" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#22d3f4"/>
+      <stop offset="100%" stop-color="#1a3fe0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- left figure: arc body then head -->
+  <path d="M 40 330
+           A 115 115 0 0 1 260 300"
+        fill="none" stroke="url(#bwuGradL)" stroke-width="58" stroke-linecap="round"/>
+  <circle cx="150" cy="145" r="60" fill="url(#bwuGradL)"/>
+
+  <!-- right figure -->
+  <path d="M 480 330
+           A 115 115 0 0 0 260 300"
+        fill="none" stroke="url(#bwuGradR)" stroke-width="58" stroke-linecap="round"/>
+  <circle cx="370" cy="145" r="60" fill="url(#bwuGradR)"/>
+
+  <!-- center figure: drawn last so it sits on top, arc dips lower forming the interlock -->
+  <path d="M 145 335
+           A 125 125 0 0 1 375 335"
+        fill="none" stroke="url(#bwuGradC)" stroke-width="62" stroke-linecap="round"/>
+  <circle cx="260" cy="100" r="68" fill="url(#bwuGradC)"/>
+</svg>

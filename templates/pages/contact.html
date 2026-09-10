@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block title %}Contact — Better WithUs{% endblock %}
+
+{% block content %}
+
+<section class="hero" style="padding-bottom: 2rem;">
+  <div class="container">
+    <span class="hero-badge">Let's talk</span>
+    <h1>Tell us what you're working on.</h1>
+    <p class="lead mt-3">
+      Complete this short inquiry to help us understand your requirements — a member of our
+      team will get back to you within one business day.
+    </p>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-7">
+        <div class="card-bwu">
+          <form method="post" novalidate id="inquiry-form">
+            {% csrf_token %}
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="{{ form.business_name.id_for_label }}">Business Name</label>
+                {{ form.business_name }}
+                {% for error in form.business_name.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-md-6">
+                <label for="{{ form.contact_name.id_for_label }}">Contact Name</label>
+                {{ form.contact_name }}
+                {% for error in form.contact_name.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-md-6">
+                <label for="{{ form.email.id_for_label }}">Email</label>
+                {{ form.email }}
+                {% for error in form.email.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-md-6">
+                <label for="{{ form.phone.id_for_label }}">Phone</label>
+                {{ form.phone }}
+                {% for error in form.phone.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+            </div>
+
+            <div class="form-group-block">
+              <label class="d-block">{{ form.is_operational.label }}</label>
+              <div class="option-list option-list-inline">
+                {% for radio in form.is_operational %}
+                  <label class="option-pill">{{ radio.tag }} {{ radio.choice_label }}</label>
+                {% endfor %}
+              </div>
+              {% for error in form.is_operational.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+            </div>
+
+            <div class="form-group-block">
+              <label class="d-block">{{ form.social_media_status.label }}</label>
+              <div class="option-list">
+                {% for radio in form.social_media_status %}
+                  <label class="option-pill d-block">{{ radio.tag }} {{ radio.choice_label }}</label>
+                {% endfor %}
+              </div>
+            </div>
+
+            <div class="form-group-block" id="social-links-group">
+              <label for="{{ form.social_media_links.id_for_label }}">{{ form.social_media_links.label }}</label>
+              {{ form.social_media_links }}
+            </div>
+
+            <div class="form-group-block">
+              <label class="d-block">{{ form.services_interested.label }}</label>
+              <div class="option-list">
+                {% for checkbox in form.services_interested %}
+                  <label class="option-pill d-block">{{ checkbox.tag }} {{ checkbox.choice_label }}</label>
+                {% endfor %}
+              </div>
+            </div>
+
+            <div class="form-group-block">
+              <label for="{{ form.monthly_investment.id_for_label }}">{{ form.monthly_investment.label }}</label>
+              {{ form.monthly_investment }}
+            </div>
+
+            <div class="form-group-block">
+              <label class="d-block">{{ form.referral_source.label }}</label>
+              <div class="option-list option-list-inline">
+                {% for checkbox in form.referral_source %}
+                  <label class="option-pill">{{ checkbox.tag }} {{ checkbox.choice_label }}</label>
+                {% endfor %}
+              </div>
+            </div>
+
+            <button type="submit" class="btn-gradient mt-4">Submit</button>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="contact-info-card mb-4">
+          <h5 class="mb-3">Contact details</h5>
+          <p class="mb-0" style="color: var(--muted);"><strong style="color: var(--ink);">Email:</strong> <a href="mailto:betterwithus2026@gmail.com">betterwithus2026@gmail.com</a></p>
+        </div>
+        <div class="contact-info-card">
+          <h5 class="mb-3">What happens next?</h5>
+          <ul style="color: var(--muted);" class="mb-0 ps-3">
+            <li class="mb-2">We review your inquiry within one business day.</li>
+            <li class="mb-2">We schedule a free 30-minute discovery call.</li>
+            <li>We come back with a scoped plan — no obligation.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  (function () {
+    var group = document.getElementById('social-links-group');
+    var radios = document.querySelectorAll('input[name="social_media_status"]');
+    function sync() {
+      var hasAccounts = false;
+      radios.forEach(function (r) {
+        if (r.checked && r.value.indexOf("I have social media accounts") === 0) {
+          hasAccounts = true;
+        }
+      });
+      group.style.display = hasAccounts ? '' : 'none';
+    }
+    if (radios.length && group) {
+      radios.forEach(function (r) { r.addEventListener('change', sync); });
+      sync();
+    }
+  })();
+
+  (function () {
+    var services = document.querySelectorAll('input[name="services_interested"]');
+    var allOption = null;
+    var others = [];
+    services.forEach(function (cb) {
+      if (cb.value === 'All of the above') {
+        allOption = cb;
+      } else {
+        others.push(cb);
+      }
+    });
+    if (!allOption || !others.length) return;
+
+    allOption.addEventListener('change', function () {
+      if (allOption.checked) {
+        others.forEach(function (cb) { cb.checked = false; });
+      }
+    });
+    others.forEach(function (cb) {
+      cb.addEventListener('change', function () {
+        if (cb.checked) {
+          allOption.checked = false;
+        }
+      });
+    });
+  })();
+</script>
+{% endblock %}

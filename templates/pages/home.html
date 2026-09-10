@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Better WithUs — Consulting for Ambitious Businesses{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7">
+        <span class="hero-badge">Strategy &middot; Operations &middot; Growth</span>
+        <h1>Better decisions, <span class="gradient-text">better outcomes</span> — with us.</h1>
+        <p class="lead mt-3 mb-4">
+          Better WithUs is a consultancy that partners with founders and leadership teams
+          to solve hard problems, streamline operations, and unlock sustainable growth.
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="{% url 'pages:contact' %}" class="btn-gradient">Book a consultation</a>
+          <a href="{% url 'pages:services' %}" class="btn-outline-bwu">Explore services</a>
+        </div>
+      </div>
+      <div class="col-lg-5 text-center mt-5 mt-lg-0">
+        <img src="{% static 'pages/img/logo-mark.svg' %}" alt="Better WithUs" style="max-width: 340px; width: 100%;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container text-center">
+    <h2 class="section-title">What we do</h2>
+    <p class="section-subtitle mx-auto">
+      We work shoulder to shoulder with your team — not just handing over a deck,
+      but staying with you through execution.
+    </p>
+    <div class="row g-4 text-start">
+      {% for service in services %}
+      <div class="col-md-4">
+        <div class="card-bwu">
+          <span class="icon">{{ service.icon|default:"◆" }}</span>
+          <h5 class="mb-2">{{ service.title }}</h5>
+          <p class="text-secondary mb-0" style="color: var(--muted) !important;">{{ service.summary }}</p>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-md-4">
+        <div class="card-bwu">
+          <span class="icon">📊</span>
+          <h5 class="mb-2">Strategy Consulting</h5>
+          <p style="color: var(--muted);">Clear, actionable strategy grounded in your market reality and your numbers.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-bwu">
+          <span class="icon">⚙️</span>
+          <h5 class="mb-2">Operations &amp; Process</h5>
+          <p style="color: var(--muted);">We untangle inefficient workflows and build processes that scale with you.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-bwu">
+          <span class="icon">📈</span>
+          <h5 class="mb-2">Growth &amp; Marketing</h5>
+          <p style="color: var(--muted);">Go-to-market plans and growth engines that turn interest into revenue.</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <a href="{% url 'pages:services' %}" class="btn-outline-bwu d-inline-block mt-5">View all services</a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <h2 class="fw-bold mb-3">Ready to build something better, together?</h2>
+      <p class="mb-4" style="color: rgba(255,255,255,0.85);">Tell us where you're stuck — we'll come back with a plan, not a pitch.</p>
+      <a href="{% url 'pages:contact' %}" class="btn-gradient">Start the conversation</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
