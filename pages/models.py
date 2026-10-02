@@ -25,13 +25,26 @@ class ContactMessage(models.Model):
 
 
 class Service(models.Model):
+    ICON_CHOICES = [
+        ('brand-identity', 'Brand Identity'),
+        ('content-creation', 'Content Creation'),
+        ('websites', 'Websites'),
+        ('business-consulting', 'Business Consulting'),
+    ]
+
     title = models.CharField(max_length=100)
-    icon = models.CharField(
-        max_length=10,
-        blank=True,
-        help_text="An emoji or short glyph shown next to the title",
+    summary = models.CharField(
+        max_length=255,
+        help_text="Short tagline shown under the title, e.g. 'A clear identity for your business.'",
     )
-    summary = models.CharField(max_length=255)
+    bullets = models.TextField(
+        blank=True,
+        help_text="One bullet point per line.",
+    )
+    icon_slug = models.CharField(
+        max_length=30, choices=ICON_CHOICES, blank=True,
+        help_text="Which icon graphic to show for this service.",
+    )
     description = models.TextField(blank=True)
     order = models.PositiveIntegerField(default=0)
 
@@ -40,6 +53,15 @@ class Service(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def bullet_list(self):
+        return [line.strip() for line in self.bullets.splitlines() if line.strip()]
+
+    @property
+    def icon_path(self):
+        slug = self.icon_slug or 'business-consulting'
+        return f'pages/img/icons/{slug}.svg'
 
 
 class TeamMember(models.Model):

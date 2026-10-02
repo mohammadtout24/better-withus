@@ -8,7 +8,7 @@ from .models import ContactMessage, Service
 
 def home(request):
     context = {
-        'services': Service.objects.all()[:3],
+        'services': Service.objects.all(),
     }
     return render(request, 'pages/home.html', context)
 

@@ -11,11 +11,10 @@ SOCIAL_MEDIA_STATUS_CHOICES = [
 ]
 
 SERVICE_CHOICES = [
-    ('Strategy Consulting', 'Strategy Consulting'),
-    ('Operations & Process', 'Operations & Process'),
-    ('Growth & Marketing', 'Growth & Marketing'),
-    ('Financial Advisory', 'Financial Advisory'),
-    ('Organizational Design', 'Organizational Design'),
+    ('Brand Identity', 'Brand Identity'),
+    ('Content Creation', 'Content Creation'),
+    ('Websites', 'Websites'),
+    ('Business Consulting', 'Business Consulting'),
     ('All of the above', 'All of the above'),
 ]
 

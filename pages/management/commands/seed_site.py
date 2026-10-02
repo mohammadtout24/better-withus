@@ -8,22 +8,40 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         services = [
-            ('📊', 'Strategy Consulting',
-             'Market analysis, competitive positioning, and long-range planning that holds up under pressure-testing.'),
-            ('⚙️', 'Operations & Process',
-             'Workflow audits, org design, and process automation that removes friction without adding bureaucracy.'),
-            ('📈', 'Growth & Marketing',
-             'Go-to-market strategy, channel testing, and demand generation built to compound.'),
-            ('💰', 'Financial Advisory',
-             'Budgeting, fundraising prep, and unit economics that give leadership real visibility.'),
-            ('👥', 'Organizational Design',
-             "Team structure, hiring plans, and leadership coaching for the stage you're actually at."),
-            ('🔄', 'Change Management',
-             'Rollout plans and communication frameworks that get real buy-in, not just sign-off.'),
+            (
+                'brand-identity',
+                'Brand Identity',
+                'A clear identity for your business.',
+                ['Visual identity', 'Brand guidelines', 'Consistent brand direction'],
+            ),
+            (
+                'content-creation',
+                'Content Creation',
+                'Content that brings your brand to life.',
+                ['Social media content', 'Creative concepts', 'Brand storytelling'],
+            ),
+            (
+                'websites',
+                'Websites',
+                'A digital home built around your business.',
+                ['Website design', 'Website development', 'Clear user experiences'],
+            ),
+            (
+                'business-consulting',
+                'Business Consulting',
+                'Fresh thinking for your next move.',
+                ['Understand your challenges', 'Explore practical solutions', 'Define clear next steps'],
+            ),
         ]
-        for order, (icon, title, summary) in enumerate(services):
+        for order, (icon_slug, title, summary, bullets) in enumerate(services):
             Service.objects.update_or_create(
-                title=title, defaults={'icon': icon, 'summary': summary, 'order': order},
+                title=title,
+                defaults={
+                    'summary': summary,
+                    'bullets': '\n'.join(bullets),
+                    'icon_slug': icon_slug,
+                    'order': order,
+                },
             )
 
         self.stdout.write(self.style.SUCCESS('Seeded services.'))

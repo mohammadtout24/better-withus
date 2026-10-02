@@ -1,0 +1,7 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Brand Identity">
+  <path d="M8 8 H45 V45 H8 A37 37 0 0 1 8 8 Z" fill="#1c4542"/>
+  <rect x="55" y="8" width="37" height="37" fill="#1c4542"/>
+  <rect x="8" y="55" width="37" height="37" fill="none" stroke="#1c4542" stroke-width="4"/>
+  <path d="M55 92 L73.5 58 L92 92 Z" fill="#1c4542"/>
+  <circle cx="80" cy="80" r="12" fill="#1c4542"/>
+</svg>

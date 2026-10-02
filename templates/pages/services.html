@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Services — Better WithUs{% endblock %}
 
@@ -7,10 +8,10 @@
 <section class="hero" style="padding-bottom: 2rem;">
   <div class="container">
     <span class="hero-badge">What we offer</span>
-    <h1>Consulting built around <span class="gradient-text">your bottleneck</span>, not our template.</h1>
+    <h1>Better brands. <span class="gradient-text">Clearer direction.</span></h1>
     <p class="lead mt-3">
-      Every engagement is scoped around the problem in front of you — from a single strategic
-      question to a full operating model redesign.
+      Every engagement is scoped around the problem in front of you — from a single brand
+      question to a full website build.
     </p>
   </div>
 </section>
@@ -19,57 +20,18 @@
   <div class="container">
     <div class="row g-4">
       {% for service in services %}
-      <div class="col-md-6 col-lg-4">
+      <div class="col-md-6 col-lg-3">
         <div class="card-bwu">
-          <span class="icon">{{ service.icon|default:"◆" }}</span>
+          <img class="icon" src="{% static service.icon_path %}" alt="" width="48" height="48">
           <h5 class="mb-2">{{ service.title }}</h5>
-          <p style="color: var(--muted);" class="mb-2">{{ service.summary }}</p>
-          {% if service.description %}
-            <p style="color: var(--muted); font-size: 0.9rem;" class="mb-0">{{ service.description }}</p>
+          <p style="color: var(--teal-soft);" class="mb-0">{{ service.summary }}</p>
+          {% if service.bullet_list %}
+            <ul class="service-bullets">
+              {% for bullet in service.bullet_list %}
+                <li>{{ bullet }}</li>
+              {% endfor %}
+            </ul>
           {% endif %}
-        </div>
-      </div>
-      {% empty %}
-      <div class="col-md-6 col-lg-4">
-        <div class="card-bwu">
-          <span class="icon">📊</span>
-          <h5 class="mb-2">Strategy Consulting</h5>
-          <p style="color: var(--muted);">Market analysis, competitive positioning, and long-range planning that holds up under pressure-testing.</p>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="card-bwu">
-          <span class="icon">⚙️</span>
-          <h5 class="mb-2">Operations &amp; Process</h5>
-          <p style="color: var(--muted);">Workflow audits, org design, and process automation that removes friction without adding bureaucracy.</p>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="card-bwu">
-          <span class="icon">📈</span>
-          <h5 class="mb-2">Growth &amp; Marketing</h5>
-          <p style="color: var(--muted);">Go-to-market strategy, channel testing, and demand generation built to compound.</p>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="card-bwu">
-          <span class="icon">💰</span>
-          <h5 class="mb-2">Financial Advisory</h5>
-          <p style="color: var(--muted);">Budgeting, fundraising prep, and unit economics that give leadership real visibility.</p>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="card-bwu">
-          <span class="icon">👥</span>
-          <h5 class="mb-2">Organizational Design</h5>
-          <p style="color: var(--muted);">Team structure, hiring plans, and leadership coaching for the stage you're actually at.</p>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="card-bwu">
-          <span class="icon">🔄</span>
-          <h5 class="mb-2">Change Management</h5>
-          <p style="color: var(--muted);">Rollout plans and communication frameworks that get real buy-in, not just sign-off.</p>
         </div>
       </div>
       {% endfor %}
@@ -82,7 +44,7 @@
     <div class="row align-items-center g-4">
       <div class="col-lg-8">
         <h2 class="section-title mb-2">Not sure where to start?</h2>
-        <p style="color: var(--muted);" class="mb-0">Book a free 30-minute consultation and we'll help you scope the right engagement.</p>
+        <p style="color: var(--teal-soft);" class="mb-0">Book a free 30-minute consultation and we'll help you scope the right engagement.</p>
       </div>
       <div class="col-lg-4 text-lg-end">
         <a href="{% url 'pages:contact' %}" class="btn-gradient">Book a consultation</a>
